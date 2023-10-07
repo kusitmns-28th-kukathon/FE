@@ -10,34 +10,35 @@ import {
 	StatusBar,
 } from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
-
+import axios from 'axios';
 import BottomSheet from '@gorhom/bottom-sheet';
 import {LinearGradient} from 'expo-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
 import Star1 from './starPosition/Star1';
 import Star2 from './starPosition/Star2';
 import Star3 from './starPosition/Star3';
-
+import {accessTokenState} from '../states/auth';
+import {useRecoilState} from 'recoil';
 
 const Home = () => {
-  const bottomSheetRef = useRef(null);
-  const navigation = useNavigation();
-  // variables
-  const snapPoints = useMemo(() => ["50%", "14%"], []);
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+	const bottomSheetRef = useRef(null);
+	const navigation = useNavigation();
+	// variables
+	const snapPoints = useMemo(() => ['50%', '14%'], []);
+	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
 
-  // callbacks
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
-
+	// callbacks
+	const handleSheetChanges = useCallback(index => {
+		console.log('handleSheetChanges', index);
+	}, []);
 
 	const addList = value => {
 		setBtn(!btn);
-		setTextArray([...textArray, value]);
+		// setTextArray([...textArray, value]);
 	};
 
-	const [textArray, setTextArray] = useState([]);
+	const [textArray, setTextArray] = useState([1]);
+	const [lastArray, setLastArray] = useState([]);
 	const [value, onChangeText] = useState('');
 	const [btn, setBtn] = useState(false);
 	const arr = [
@@ -45,6 +46,32 @@ const Home = () => {
 		{back: '../../assets/star1on.png', on: '../../assets/star2.png'},
 		{back: '../../assets/star3on.png', on: '../../assets/star3.png'},
 	];
+
+	const registrationBtn = () => {
+		axios
+			.post(
+				'http://3.37.52.73:80/api/user/diary/add-diary',
+				{contents: value},
+				{
+					headers: {
+						access: accessToken,
+					},
+				},
+			)
+			.then(res => {
+				alert('등록완료');
+				setLastArray([...lastArray, value]);
+				console.log(value);
+				setBtn(false);
+				onChangeText('');
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+	useEffect(() => {
+		console.log(accessToken);
+	}, [textArray.length]);
 
 	return (
 		<LinearGradient colors={['#0A0026', '#200C5B']} style={styles.container}>
@@ -90,7 +117,7 @@ const Home = () => {
 							</TouchableOpacity>
 						</View>
 					</View>
-					{!btn ? (
+					{!btn && lastArray.length == 0 ? (
 						<View>
 							<Text
 								style={{
@@ -124,7 +151,11 @@ const Home = () => {
 						</View>
 					)}
 					{!btn ? (
-						''
+						lastArray.map(item => (
+							<View style={styles.inputTag}>
+								<Text>{item}</Text>
+							</View>
+						))
 					) : (
 						<View style={styles.registrationBtn}>
 							<TouchableOpacity onPress={() => registrationBtn()}>
@@ -137,7 +168,6 @@ const Home = () => {
 			{/* </SafeAreaView> */}
 		</LinearGradient>
 	);
-
 };
 
 export default Home;
@@ -236,6 +266,7 @@ const styles = StyleSheet.create({
 		paddingTop: 15,
 		paddingLeft: 25,
 	},
+
 	registrationBtn: {
 		position: 'absolute',
 		left: 20,
@@ -252,5 +283,4 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		lineHeight: 40,
 	},
-
 });
