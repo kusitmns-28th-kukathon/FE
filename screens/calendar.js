@@ -1,27 +1,24 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import { Calendar } from "react-native-calendars";
 
-const Calendar = () => {
+const CalendarView = () => {
   const navigation = useNavigation();
 
   return (
     <View style={Styles.container}>
-      <Text style={Styles.HomeText}>캘린더 화면</Text>
+      <Calendar style={Styles.calendar} />
     </View>
   );
 };
 
-export default Calendar;
+export default CalendarView;
 
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-  },
-  HomeText: {
-    fontSize: 30,
-    textAlign: "center",
   },
   NextBottom: {
     backgroundColor: "purple",
@@ -35,5 +32,11 @@ const Styles = StyleSheet.create({
     fontSize: 15,
     color: "white",
     textAlign: "center",
+  },
+  calendar: {
+    borderBottomWidth: 1,
+    borderBottomColor: "#e0e0e0",
+    color: "#fff",
+    margin: 30,
   },
 });
