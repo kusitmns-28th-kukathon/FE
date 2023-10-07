@@ -144,6 +144,7 @@ const Styles = StyleSheet.create({
     marginTop: 20,
     marginLeft: 18,
     marginRight: 18,
+    color: "#fff",
   },
   content: {
     display: "flex",
