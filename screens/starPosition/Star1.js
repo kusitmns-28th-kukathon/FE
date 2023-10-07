@@ -37,6 +37,7 @@ const Star1 = () => {
 					if (idx < dummy.length) {
 						return (
 							<TouchableOpacity
+								key={idx}
 								// style={btn ? styles.star : styles.starOn}
 								style={{position: 'absolute', top: item.top, left: item.left}}
 								// onPrestss={() => navigation.navigate('Alarm')}

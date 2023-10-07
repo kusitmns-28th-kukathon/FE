@@ -1,10 +1,4 @@
-import React, {
-  useCallback,
-  useState,
-  useMemo,
-  useRef,
-  useEffect,
-} from "react";
+import React, {useCallback, useState, useMemo, useRef, useEffect} from 'react';
 import {
 	View,
 	ScrollView,
@@ -84,7 +78,7 @@ const Home = () => {
 			<StatusBar barStyle="light-content" />
 			<View style={styles.header}>
 				<Image style={styles.logo} source={require('../assets/homeLogo.png')} />
-				<TouchableOpacity style={styles.alarm} onPress={() => setBtn(!btn)}>
+				<TouchableOpacity style={styles.alarm}>
 					<Image source={require('../assets/alarmWhite.png')} />
 				</TouchableOpacity>
 			</View>
@@ -174,7 +168,6 @@ const Home = () => {
 			{/* </SafeAreaView> */}
 		</LinearGradient>
 	);
-
 };
 
 export default Home;
