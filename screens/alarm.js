@@ -84,7 +84,7 @@ export default Alarm;
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#100D30",
     padding: 15,
   },
   header: {
@@ -100,6 +100,7 @@ const Styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginLeft: 13,
+    color: "#fff",
   },
   NextBottom: {
     backgroundColor: "purple",
@@ -170,7 +171,7 @@ const Styles = StyleSheet.create({
     width: 110,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
+    backgroundColor: "#D0D7DE",
     padding: 10,
     borderRadius: 30,
   },
@@ -178,15 +179,15 @@ const Styles = StyleSheet.create({
     width: 110,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "#24292F",
     padding: 10,
     borderRadius: 30,
   },
   buttonText: {
-    color: "#fff",
+    color: "#000",
   },
   inActiveButtonText: {
-    color: "#666",
+    color: "#fff",
   },
   time: {
     color: "#999",
@@ -197,7 +198,8 @@ const Styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    borderBottomColor: "#373552",
+
     paddingTop: 8,
     paddingBottm: 8,
     gap: 10,
@@ -212,6 +214,7 @@ const Styles = StyleSheet.create({
     fontSize: 15,
     marginRight: 180,
     width: "100%",
+    color: "#fff",
   },
   alarmTime: {
     fontSize: 15,
