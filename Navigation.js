@@ -4,7 +4,7 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 
 import Home from './screens/home';
-import Calendar from './screens/calendar';
+import Signin from './screens/signin';
 import Friend from './screens/friend';
 import MyPage from './screens/mypage';
 import Splash from './screens/splash';
@@ -24,8 +24,8 @@ function TabNavigator() {
 				}}
 			/>
 			<Tab.Screen
-				name="캘린더"
-				component={Calendar}
+				name="로그인"
+				component={Signin}
 				options={{
 					headerShown: false,
 				}}
