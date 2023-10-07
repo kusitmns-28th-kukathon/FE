@@ -1,32 +1,35 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { format } from "date-fns";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
+
+const posts = [
+  {
+    id: 1,
+    contents: ["26일 내용입니다", "26일 내용입니다2", "26일 내용입니다3"],
+    date: "2023-10-26",
+  },
+  {
+    id: 2,
+    contents: ["27일 내용입니다2", "27일 내용입니다3"],
+    date: "2023-10-27",
+  },
+  {
+    id: 3,
+    contents: [
+      "18일 내용입니다",
+      "18일 내용입니다",
+      "18일 내용입니다",
+      "18일 내용입니다",
+    ],
+    date: "2023-10-18",
+  },
+];
 
 const CalendarView = () => {
-  const posts = [
-    {
-      id: 1,
-      contents: ["26일 내용입니다", "26일 내용입니다2", "26일 내용입니다3"],
-      date: "2023-10-26",
-    },
-    {
-      id: 2,
-      contents: ["27일 내용입니다2", "27일 내용입니다3"],
-      date: "2023-10-27",
-    },
-    {
-      id: 3,
-      contents: [
-        "18일 내용입니다",
-        "18일 내용입니다",
-        "18일 내용입니다",
-        "18일 내용입니다",
-      ],
-      date: "2023-10-18",
-    },
-  ];
+  const navigation = useNavigation();
 
   const markedDates = posts.reduce((acc, current) => {
     const formattedDate = format(new Date(current.date), "yyyy-MM-dd");
@@ -57,7 +60,9 @@ const CalendarView = () => {
     <SafeAreaView style={Styles.container}>
       <View style={Styles.header}>
         <Text style={Styles.Title}>캘린더</Text>
-        <Image source={require("../assets/alarm.png")} />
+        <TouchableOpacity onPress={() => navigation.navigate("Alarm")}>
+          <Image source={require("../assets/alarm.png")} />
+        </TouchableOpacity>
       </View>
       <Calendar
         style={Styles.calendar}
@@ -95,8 +100,7 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 10,
-    padding: 15,
+    padding: 10,
   },
   header: {
     flexDirection: "row",
