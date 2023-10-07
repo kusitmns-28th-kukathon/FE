@@ -1,6 +1,14 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useNavigation } from "@react-navigation/native";
 
 const FriendList = [
   {
@@ -46,11 +54,15 @@ const FriendList = [
 ];
 
 const Friend = () => {
+  const navigation = useNavigation();
+
   return (
     <SafeAreaView style={Styles.container}>
       <View style={Styles.header}>
         <Text style={Styles.Title}>친구의 별자리</Text>
-        <Image source={require("../assets/alarm.png")} />
+        <TouchableOpacity onPress={() => navigation.navigate("Search")}>
+          <Image source={require("../assets/search.png")} />
+        </TouchableOpacity>
       </View>
       <ScrollView
         horizontal
