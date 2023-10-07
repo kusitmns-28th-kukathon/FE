@@ -4,6 +4,7 @@ import { Calendar } from "react-native-calendars";
 import { format } from "date-fns";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import { LinearGradient } from "expo-linear-gradient";
 
 const posts = [
   {
@@ -27,6 +28,24 @@ const posts = [
     date: "2023-10-18",
   },
 ];
+
+const calendarTheme = {
+  calendarBackground: "#100D30",
+  textSectionTitleColor: "#fff",
+  selectedDayBackgroundColor: "#4619C5",
+  arrowColor: "#fff",
+  dotColor: "#AD97ED",
+  todayTextColor: "#fff",
+  textMonthFontSize: 20,
+  textDisabledColor: "#fff",
+  textInactiveColor: "#fff",
+  textDayHeaderFontWeight: "bold",
+  textDayHeaderFontColor: "#fff",
+  textDayFontWeight: "bold",
+  dayTextColor: "#fff",
+  textDisabledColor: "gray",
+  monthTextColor: "#fff",
+};
 
 const CalendarView = () => {
   const navigation = useNavigation();
@@ -57,27 +76,17 @@ const CalendarView = () => {
   };
 
   return (
-    <SafeAreaView style={Styles.container}>
+    <LinearGradient colors={["#0A0026", "#200C5B"]} style={Styles.container}>
       <View style={Styles.header}>
         <Text style={Styles.Title}>캘린더</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Alarm")}>
-          <Image source={require("../assets/alarm.png")} />
+          <Image source={require("../assets/alarmWhite.png")} />
         </TouchableOpacity>
       </View>
       <Calendar
         style={Styles.calendar}
         markedDates={markedSelectedDates}
-        theme={{
-          selectedDayBackgroundColor: "#C8B9F3",
-          arrowColor: "#8867E5",
-          dotColor: "#8867E5",
-          todayTextColor: "#009688",
-          textDayHeaderFontWeight: "bold",
-          textDayFontWeight: "bold",
-          textMonthFontWeight: "bold",
-          textMonthFontSize: "20",
-          selectedDayTextColor: "black",
-        }}
+        theme={calendarTheme}
         onDayPress={handleDayPress}
       />
       {selectedPost && (
@@ -90,7 +99,7 @@ const CalendarView = () => {
           ))}
         </View>
       )}
-    </SafeAreaView>
+    </LinearGradient>
   );
 };
 
@@ -101,6 +110,7 @@ const Styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     padding: 10,
+    paddingTop: 30,
   },
   header: {
     flexDirection: "row",
@@ -133,6 +143,7 @@ const Styles = StyleSheet.create({
     marginBottom: 10,
     marginLeft: 10,
     marginTop: 20,
+    color: "#fff",
   },
   Content: {
     fontSize: 15,
@@ -143,5 +154,7 @@ const Styles = StyleSheet.create({
     borderRadius: 25,
     borderColor: "#EDE8FB",
     backgroundColor: "#fff",
+    overflow: "hidden",
+    opacity: 0.8,
   },
 });
