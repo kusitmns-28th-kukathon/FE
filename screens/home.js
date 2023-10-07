@@ -1,4 +1,10 @@
-import React, {useCallback, useState, useMemo, useRef, useEffect} from 'react';
+import React, {
+  useCallback,
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+} from "react";
 import {
 	View,
 	ScrollView,
@@ -168,6 +174,7 @@ const Home = () => {
 			{/* </SafeAreaView> */}
 		</LinearGradient>
 	);
+
 };
 
 export default Home;
