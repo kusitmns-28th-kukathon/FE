@@ -1,7 +1,6 @@
-import React, {useCallback, useState, useMemo, useRef} from 'react';
+import React, {useCallback, useState, useMemo, useRef, useEffect} from 'react';
 import {
 	View,
-	SafeAreaView,
 	ScrollView,
 	Image,
 	Text,
@@ -10,9 +9,14 @@ import {
 	TouchableOpacity,
 	StatusBar,
 } from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+
 import BottomSheet from '@gorhom/bottom-sheet';
 import {LinearGradient} from 'expo-linear-gradient';
 import {useNavigation} from '@react-navigation/native';
+import Star1 from './starPosition/Star1';
+import Star2 from './starPosition/Star2';
+import Star3 from './starPosition/Star3';
 
 const Home = () => {
 	const bottomSheetRef = useRef(null);
@@ -26,35 +30,45 @@ const Home = () => {
 	}, []);
 
 	const addList = value => {
+		setBtn(!btn);
 		setTextArray([...textArray, value]);
 	};
 
 	const [textArray, setTextArray] = useState([]);
 	const [value, onChangeText] = useState('');
 	const [btn, setBtn] = useState(false);
+	const arr = [
+		{back: '../../assets/star1on.png', on: '../../assets/star2.png'},
+		{back: '../../assets/star1on.png', on: '../../assets/star2.png'},
+		{back: '../../assets/star3on.png', on: '../../assets/star3.png'},
+	];
 
 	return (
 		<LinearGradient colors={['#0A0026', '#200C5B']} style={styles.container}>
 			<StatusBar barStyle="light-content" />
-			{/* <SafeAreaView style={styles.container}> */}
 			<View style={styles.header}>
 				<Image style={styles.logo} source={require('../assets/homeLogo.png')} />
 				<TouchableOpacity style={styles.alarm} onPress={() => setBtn(!btn)}>
 					<Image source={require('../assets/alarmWhite.png')} />
 				</TouchableOpacity>
 			</View>
-			<View style={styles.starMap}>
-				<Image
-					style={styles.background}
-					source={require('../assets/star1.png')}
-				/>
-				<TouchableOpacity
-					style={btn ? styles.star : styles.starOn}
-					// onPrestss={() => navigation.navigate('Alarm')}
+			{/* <SafeAreaView style={styles.container}> */}
+			<SafeAreaView style={styles.container}>
+				<ScrollView
+					horizontal
+					contentContainerStyle={styles.friendListBox}
+					showsHorizontalScrollIndicator={false}
+					ref={ref => {
+						this.scrollView = ref;
+						// onChange={this.scrollView.scrollTo({x: 780})}
+					}}
 				>
-					<Image source={require('../assets/ShineStar.png')} />
-				</TouchableOpacity>
-			</View>
+					<Star1 />
+					<Star2 />
+					<Star3 />
+				</ScrollView>
+			</SafeAreaView>
+
 			<BottomSheet
 				ref={bottomSheetRef}
 				index={1}
@@ -73,28 +87,48 @@ const Home = () => {
 							</TouchableOpacity>
 						</View>
 					</View>
-
-					<View style={styles.scrollView}>
-						{textArray.map((item, idx) => (
-							<TextInput
-								key={idx}
-								editable
-								multiline
-								placeholder="글을 작성해주세요!"
-								autoFocus
-								numberOfLines={4}
-								maxLength={40}
-								onChangeText={text => onChangeText(text)}
-								value={value}
-								style={styles.inputTag}
-							/>
-						))}
-					</View>
-					<View style={styles.registrationBtn}>
-						<TouchableOpacity onPress={() => registrationBtn()}>
-							<Text style={styles.TextRegister}>등록하기</Text>
-						</TouchableOpacity>
-					</View>
+					{!btn ? (
+						<View>
+							<Text
+								style={{
+									position: 'absolute',
+									top: 140,
+									left: '22%',
+									fontWeight: 'bold',
+									fontSize: 16,
+									color: '#57606A',
+								}}
+							>
+								오늘의 감사일기를 적어보세요.
+							</Text>
+						</View>
+					) : (
+						<View style={styles.scrollView}>
+							{textArray.map((item, idx) => (
+								<TextInput
+									key={idx}
+									editable
+									multiline
+									placeholder="글을 작성해주세요!"
+									autoFocus
+									numberOfLines={4}
+									maxLength={40}
+									onChangeText={text => onChangeText(text)}
+									value={value}
+									style={styles.inputTag}
+								/>
+							))}
+						</View>
+					)}
+					{!btn ? (
+						''
+					) : (
+						<View style={styles.registrationBtn}>
+							<TouchableOpacity onPress={() => registrationBtn()}>
+								<Text style={styles.TextRegister}>등록하기</Text>
+							</TouchableOpacity>
+						</View>
+					)}
 				</View>
 			</BottomSheet>
 			{/* </SafeAreaView> */}
@@ -107,7 +141,7 @@ export default Home;
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: '#100D30',
+		// backgroundColor: '#100D30',
 	},
 	contentContainer: {
 		flex: 1,
@@ -123,6 +157,7 @@ const styles = StyleSheet.create({
 		display: 'flex',
 		flexDirection: 'row',
 		justifyContent: 'space-between',
+		marginTop: 15,
 	},
 	alarm: {
 		marginTop: 60,
@@ -139,9 +174,9 @@ const styles = StyleSheet.create({
 	},
 	star: {
 		position: 'absolute',
-		top: 85,
-		left: 75,
-		opacity: 0,
+		top: 425,
+		left: 110,
+		opacity: 1,
 	},
 	starOn: {
 		position: 'absolute',
