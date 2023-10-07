@@ -8,7 +8,7 @@ import Login from './screens/Login';
 import Friend from './screens/friend';
 import MyPage from './screens/mypage';
 import Splash from './screens/splash';
-import KakaoLogin from './screens/kakaoLogin';
+import Calendar from './screens/calendar';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -24,8 +24,8 @@ function TabNavigator() {
 				}}
 			/>
 			<Tab.Screen
-				name="로그인"
-				component={Login}
+				name="캘린더"
+				component={Calendar}
 				options={{
 					headerShown: false,
 				}}
@@ -52,7 +52,7 @@ function StackScreen() {
 	return (
 		<Stack.Navigator initialRouteName="Splash">
 			<Stack.Screen name="Splash" component={Splash} />
-			<Stack.Screen name="KakaoLogin" component={KakaoLogin} />
+			<Stack.Screen name="Login" component={Login} />
 			<Stack.Screen name="Home" component={TabNavigator} />
 		</Stack.Navigator>
 	);
