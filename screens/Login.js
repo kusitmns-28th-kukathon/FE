@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, TouchableOpacity, Image} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import SocialWebviewModal from './SocialWebviewModal';
 
-const Signin = () => {
+const Login = () => {
 	const navigation = useNavigation();
 	const [modalOpen, setModalOpen] = useState(false);
 
@@ -31,7 +31,7 @@ const Signin = () => {
 	);
 };
 
-export default Signin;
+export default Login;
 
 const Styles = StyleSheet.create({
 	container: {
