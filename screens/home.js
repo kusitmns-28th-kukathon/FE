@@ -6,174 +6,209 @@ import React, {
   useEffect,
 } from "react";
 import {
-  View,
-  ScrollView,
-  Image,
-  Text,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  StatusBar,
-} from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import axios from "axios";
-import BottomSheet from "@gorhom/bottom-sheet";
-import { LinearGradient } from "expo-linear-gradient";
-import { useNavigation } from "@react-navigation/native";
-import Star1 from "./starPosition/Star1";
-import Star2 from "./starPosition/Star2";
-import Star3 from "./starPosition/Star3";
-import { accessTokenState } from "../states/auth";
-import { useRecoilState } from "recoil";
+	View,
+	ScrollView,
+	Image,
+	Text,
+	StyleSheet,
+	TextInput,
+	TouchableOpacity,
+	StatusBar,
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import axios from 'axios';
+import BottomSheet from '@gorhom/bottom-sheet';
+import {LinearGradient} from 'expo-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
+import Star1 from './starPosition/Star1';
+import Star2 from './starPosition/Star2';
+import Star3 from './starPosition/Star3';
+import {accessTokenState, arrayState, dataState} from '../states/auth';
+import {useRecoilState} from 'recoil';
 
 const Home = () => {
-  const bottomSheetRef = useRef(null);
-  const navigation = useNavigation();
-  // variables
-  const snapPoints = useMemo(() => ["50%", "14%"], []);
-  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+	const bottomSheetRef = useRef(null);
+	const navigation = useNavigation();
+	// variables
+	const snapPoints = useMemo(() => ['50%', '14%'], []);
+	const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+	const [myData, setMyData] = useState([]);
+	// callbacks
+	const handleSheetChanges = useCallback(index => {
+		console.log('handleSheetChanges', index);
+	}, []);
+	const [array, setArray] = useRecoilState(arrayState);
+	const [load, setLoad] = useState(false);
+	const addList = value => {
+		setBtn(!btn);
 
-  // callbacks
-  const handleSheetChanges = useCallback((index) => {
-    console.log("handleSheetChanges", index);
-  }, []);
+		// setTextArray([...textArray, value]);
+	};
+	const [dataOpen, setDataOpen] = useRecoilState(dataState);
+	const [textArray, setTextArray] = useState([1]);
+	const [lastArray, setLastArray] = useState([]);
+	const [value, onChangeText] = useState('');
+	const [btn, setBtn] = useState(false);
+	const arr = [
+		{back: '../../assets/star1on.png', on: '../../assets/star2.png'},
+		{back: '../../assets/star1on.png', on: '../../assets/star2.png'},
+		{back: '../../assets/star3on.png', on: '../../assets/star3.png'},
+	];
 
-  const addList = (value) => {
-    setBtn(!btn);
-    // setTextArray([...textArray, value]);
-  };
+	const registrationBtn = () => {
+		axios
+			.post(
+				'http://3.37.52.73:80/api/user/diary/add-diary',
+				{contents: value},
+				{
+					headers: {
+						access: accessToken,
+					},
+				},
+			)
+			.then(res => {
+				alert('등록완료');
+				setLastArray([...lastArray, value]);
+				console.log(value);
+				setBtn(false);
+				onChangeText('');
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+	};
+	useEffect(() => {
+		console.log(array);
+		axios
+			.get('http://3.37.52.73:80/api/user/diary/friend-main')
+			.then(res => {
+				// console.log(res.data.data);
+				setMyData(res.data.data);
+				setLoad(true);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		console.log(accessToken);
+	}, [textArray.length, array]);
 
-  const [textArray, setTextArray] = useState([1]);
-  const [lastArray, setLastArray] = useState([]);
-  const [value, onChangeText] = useState("");
-  const [btn, setBtn] = useState(false);
-  const arr = [
-    { back: "../../assets/star1on.png", on: "../../assets/star2.png" },
-    { back: "../../assets/star1on.png", on: "../../assets/star2.png" },
-    { back: "../../assets/star3on.png", on: "../../assets/star3.png" },
-  ];
+	if (load) {
+		return (
+			<LinearGradient colors={['#0A0026', '#200C5B']} style={styles.container}>
+				<StatusBar barStyle="light-content" />
+				<View style={styles.header}>
+					<Image
+						style={styles.logo}
+						source={require('../assets/homeLogo.png')}
+					/>
+					<TouchableOpacity style={styles.alarm}>
+						<Image source={require('../assets/alarmWhite.png')} />
+					</TouchableOpacity>
+				</View>
+				{/* <SafeAreaView style={styles.container}> */}
+				<SafeAreaView style={styles.container}>
+					<ScrollView
+						horizontal
+						contentContainerStyle={styles.friendListBox}
+						showsHorizontalScrollIndicator={false}
+						ref={ref => {
+							this.scrollView = ref;
+							// onChange={this.scrollView.scrollTo({x: 780})}
+						}}
+					>
+						<Star1 arr1={myData[0]} />
+						<Star2 arr2={myData[1]} />
+						<Star3 arr3={myData[2]} />
+					</ScrollView>
+				</SafeAreaView>
 
-  const registrationBtn = () => {
-    axios
-      .post(
-        "http://3.37.52.73:80/api/user/diary/add-diary",
-        { contents: value },
-        {
-          headers: {
-            access: accessToken,
-          },
-        }
-      )
-      .then((res) => {
-        alert("등록완료");
-        setLastArray([...lastArray, value]);
-        console.log(value);
-        setBtn(false);
-        onChangeText("");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-  };
-  useEffect(() => {
-    console.log(accessToken);
-  }, [textArray.length]);
+				<BottomSheet
+					ref={bottomSheetRef}
+					index={1}
+					snapPoints={snapPoints}
+					onChange={handleSheetChanges}
+					backgroundStyle={styles.BottomSheetContainer}
+				>
+					<View style={styles.contentContainer}>
+						<View style={styles.mainTitle}>
+							<Text style={styles.textTitle}>
+								오늘 하루 감사했던 일은 무엇인가요?
+							</Text>
+							<View style={styles.PlusTitle}>
+								<TouchableOpacity onPress={() => addList('')}>
+									<Text style={styles.TextPlus}>+</Text>
+								</TouchableOpacity>
+							</View>
+						</View>
+						{!btn && lastArray.length == 0 ? (
+							<View>
+								<Text
+									style={{
+										position: 'absolute',
+										top: 140,
+										left: '22%',
+										fontWeight: 'bold',
+										fontSize: 16,
+										color: '#57606A',
+									}}
+								>
+									오늘의 감사일기를 적어보세요.
+								</Text>
+							</View>
+						) : (
+							<View style={styles.scrollView}>
+								{textArray.map((item, idx) => (
+									<TextInput
+										key={idx}
+										editable
+										multiline
+										placeholder="글을 작성해주세요!"
+										autoFocus
+										numberOfLines={4}
+										maxLength={40}
+										onChangeText={text => onChangeText(text)}
+										value={value}
+										style={styles.inputTag}
+									/>
+								))}
+							</View>
+						)}
 
-  return (
-    <LinearGradient colors={["#0A0026", "#200C5B"]} style={styles.container}>
-      <StatusBar barStyle="light-content" />
-      <View style={styles.header}>
-        <Image style={styles.logo} source={require("../assets/homeLogo.png")} />
-        <TouchableOpacity style={styles.alarm}>
-          <Image source={require("../assets/alarmWhite.png")} />
-        </TouchableOpacity>
-      </View>
-      {/* <SafeAreaView style={styles.container}> */}
-      <SafeAreaView style={styles.container}>
-        <ScrollView
-          horizontal
-          contentContainerStyle={styles.friendListBox}
-          showsHorizontalScrollIndicator={false}
-          ref={(ref) => {
-            this.scrollView = ref;
-            // onChange={this.scrollView.scrollTo({x: 780})}
-          }}
-        >
-          <Star1 />
-          <Star2 />
-          <Star3 />
-        </ScrollView>
-      </SafeAreaView>
+						{myData[0].map((item, idx) => {
+							if (array === idx) {
+								console.log(array, idx, item);
+								item.contents.map(i => {
+									console.log(i);
+									return (
+										<View style={styles.inputTag}>
+											<Text>{i}</Text>
+										</View>
+									);
+								});
+							}
+						})}
+						{!btn ? (
+							lastArray.map(item => (
+								<View style={styles.inputTag}>
+									<Text>{item}</Text>
+								</View>
+							))
+						) : (
+							<View style={styles.registrationBtn}>
+								<TouchableOpacity onPress={() => registrationBtn()}>
+									<Text style={styles.TextRegister}>등록하기</Text>
+								</TouchableOpacity>
+							</View>
+						)}
+					</View>
+				</BottomSheet>
+				{/* </SafeAreaView> */}
+			</LinearGradient>
+		);
+	} else {
+		<></>;
+	}
 
-      <BottomSheet
-        ref={bottomSheetRef}
-        index={1}
-        snapPoints={snapPoints}
-        onChange={handleSheetChanges}
-        backgroundStyle={styles.BottomSheetContainer}
-      >
-        <View style={styles.contentContainer}>
-          <View style={styles.mainTitle}>
-            <Text style={styles.textTitle}>
-              오늘 하루 감사했던 일은 무엇인가요?
-            </Text>
-            <View style={styles.PlusTitle}>
-              <TouchableOpacity onPress={() => addList("")}>
-                <Text style={styles.TextPlus}>+</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-          {!btn && lastArray.length == 0 ? (
-            <View>
-              <Text
-                style={{
-                  position: "absolute",
-                  top: 140,
-                  left: "22%",
-                  fontWeight: "bold",
-                  fontSize: 16,
-                  color: "#57606A",
-                }}
-              >
-                오늘의 감사일기를 적어보세요.
-              </Text>
-            </View>
-          ) : (
-            <View style={styles.scrollView}>
-              {textArray.map((item, idx) => (
-                <TextInput
-                  key={idx}
-                  editable
-                  multiline
-                  placeholder="글을 작성해주세요!"
-                  autoFocus
-                  numberOfLines={4}
-                  maxLength={40}
-                  onChangeText={(text) => onChangeText(text)}
-                  value={value}
-                  style={styles.inputTag}
-                />
-              ))}
-            </View>
-          )}
-          {!btn ? (
-            lastArray.map((item) => (
-              <View style={styles.inputTag}>
-                <Text>{item}</Text>
-              </View>
-            ))
-          ) : (
-            <View style={styles.registrationBtn}>
-              <TouchableOpacity onPress={() => registrationBtn()}>
-                <Text style={styles.TextRegister}>등록하기</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-        </View>
-      </BottomSheet>
-      {/* </SafeAreaView> */}
-    </LinearGradient>
-  );
 };
 
 export default Home;

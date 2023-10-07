@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
 	View,
 	SafeAreaView,
@@ -10,7 +10,9 @@ import {
 	TouchableOpacity,
 	StatusBar,
 } from 'react-native';
-const Star1 = () => {
+import {arrayState, dataState} from '../../states/auth';
+import {useRecoilState} from 'recoil';
+const Star1 = ({arr1}) => {
 	const dummy = [1, 2, 3, 4, 5, 6, 7];
 	const star1 = [
 		{top: 85, left: 75},
@@ -21,26 +23,41 @@ const Star1 = () => {
 		{top: 385, left: 230},
 		{top: 425, left: 110},
 	];
+	const [array, setArray] = useRecoilState(arrayState);
+	const [dataOpen, setDataOpen] = useRecoilState(dataState);
+	const spaceData = idx => {
+		setArray(idx);
+		setDataOpen(true);
+	};
+	useEffect(() => {
+		arr1?.map(item => {
+			console.log(item);
+		});
+	}, []);
 	return (
 		<View>
 			<View style={styles.starMap}>
 				<Image
 					style={styles.background}
 					source={
-						dummy.length === 7
+						arr1?.length === 7
 							? require('../../assets/star1on.png')
 							: require('../../assets/star1.png')
 					}
 				/>
 
-				{star1.map((item, idx) => {
-					if (idx < dummy.length) {
+				{star1.map((item2, idx2) => {
+					if (idx2 < arr1?.length) {
 						return (
 							<TouchableOpacity
-								key={idx}
+								key={idx2}
 								// style={btn ? styles.star : styles.starOn}
-								style={{position: 'absolute', top: item.top, left: item.left}}
-								// onPrestss={() => navigation.navigate('Alarm')}
+								style={{
+									position: 'absolute',
+									top: item2.top,
+									left: item2.left,
+								}}
+								onPress={() => spaceData(idx2)}
 							>
 								<Image source={require('../../assets/ShineStar.png')} />
 							</TouchableOpacity>

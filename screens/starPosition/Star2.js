@@ -10,7 +10,7 @@ import {
 	TouchableOpacity,
 	StatusBar,
 } from 'react-native';
-const Star2 = () => {
+const Star2 = ({arr2}) => {
 	const dummy = [1, 2, 3, 4, 5, 6, 7];
 	const star1 = [
 		{top: 85, left: 75},
@@ -27,14 +27,14 @@ const Star2 = () => {
 				<Image
 					style={styles.background}
 					source={
-						dummy.length === 7
+						arr2?.length === 7
 							? require('../../assets/star2on.png')
 							: require('../../assets/star2.png')
 					}
 				/>
 
 				{star1.map((item, idx) => {
-					if (idx < dummy.length) {
+					if (idx < arr2?.length) {
 						return (
 							<TouchableOpacity
 								key={idx}

@@ -87,7 +87,22 @@ const Friend = () => {
       });
   };
 
-  friendList();
+
+				<ScrollView
+					horizontal
+					contentContainerStyle={Styles.friendListBox1}
+					showsHorizontalScrollIndicator={false}
+					ref={ref => {
+						this.scrollView = ref;
+						// onChange={this.scrollView.scrollTo({x: 780})}
+					}}
+				>
+					<Star1 />
+					<Star2 />
+					<Star3 />
+				</ScrollView>
+			</SafeAreaView>
+
 
   const [lastArray, setLastArray] = useState(["fefwfewfe", "efwefewfwef"]);
   const [num, setNum] = useState(0);
@@ -180,103 +195,111 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1,
 
-    padding: 10,
-  },
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingLeft: 10,
-    paddingRight: 10,
-    paddingTop: 15,
-    paddingBottom: 10,
-    color: "#ffffff",
-  },
-  BottomSheetContainer: {
-    opacity: 0.8,
-    borderRadius: 20,
-  },
-  inputTag: {
-    marginTop: 20,
-    height: 50,
-    width: 350,
-    borderRadius: 100,
-    padding: 10,
-    backgroundColor: "#ffffff",
-    verticalAlign: "middle",
-    lineHeight: 20,
-    paddingTop: 15,
-    paddingLeft: 25,
-    marginLeft: 20,
-  },
-  mainTitle: {
-    marginLeft: 20,
-    marginTop: 20,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  textTitle: {
-    fontStyle: "normal",
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#24292F",
-  },
-  Title: {
-    fontSize: 20,
-    fontWeight: "bold",
-    marginBottom: 10,
-    marginLeft: 10,
-    marginTop: 20,
-    color: "#ffffff",
-  },
-  StarTitle: {
-    marginRight: 40,
-  },
-  StarDetail: {
-    display: "flex",
-    flexDirection: "row",
-    textAlign: "center",
-  },
-  num: {
-    textAlign: "center",
-    marginTop: 4,
-    marginLeft: 10,
-  },
-  NextBottom: {
-    backgroundColor: "purple",
-    padding: 10,
-    marginTop: "20%",
-    width: "50%",
-    alignSelf: "center",
-    borderRadius: 10,
-    color: "#ffffff",
-  },
-  icon: {
-    display: "flex",
-    flexDirection: "row",
-  },
-  iconSearch: {
-    marginRight: 20,
-  },
-  BottomText: {
-    fontSize: 15,
-    color: "white",
-    textAlign: "center",
-    color: "#ffffff",
-  },
-  friendListBox: {
-    flexDirection: "row",
-    padding: 10,
-  },
-  friendBox: {
-    width: 70,
-    alignItems: "center",
-  },
-  friendText: {
-    fontSize: 15,
-    marginTop: 8,
-    color: "#ffffff",
-  },
+
+		padding: 10,
+	},
+	header: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		paddingLeft: 10,
+		paddingRight: 10,
+		marginTop: -20,
+		paddingBottom: 10,
+		color: '#ffffff',
+	},
+	BottomSheetContainer: {
+		opacity: 0.8,
+		borderRadius: 20,
+	},
+	inputTag: {
+		marginTop: 20,
+		height: 50,
+		width: 350,
+		borderRadius: 100,
+		padding: 10,
+		backgroundColor: '#ffffff',
+		verticalAlign: 'middle',
+		lineHeight: 20,
+		paddingTop: 15,
+		paddingLeft: 25,
+		marginLeft: 20,
+	},
+
+	mainTitle: {
+		marginLeft: 20,
+		marginTop: 20,
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+	},
+	textTitle: {
+		fontStyle: 'normal',
+		fontSize: 16,
+		fontWeight: 'bold',
+		color: '#24292F',
+	},
+	Title: {
+		fontSize: 20,
+		fontWeight: 'bold',
+		marginBottom: 10,
+		marginLeft: 10,
+		marginTop: 20,
+		color: '#ffffff',
+	},
+	StarTitle: {
+		marginRight: 40,
+	},
+	StarDetail: {
+		display: 'flex',
+		flexDirection: 'row',
+		textAlign: 'center',
+	},
+	num: {
+		textAlign: 'center',
+		marginTop: 4,
+		marginLeft: 10,
+	},
+	NextBottom: {
+		backgroundColor: 'purple',
+		padding: 10,
+		marginTop: '20%',
+		width: '50%',
+		alignSelf: 'center',
+		borderRadius: 10,
+		color: '#ffffff',
+	},
+	icon: {
+		display: 'flex',
+		flexDirection: 'row',
+	},
+	iconSearch: {
+		marginRight: 20,
+	},
+	BottomText: {
+		fontSize: 15,
+		color: 'white',
+		textAlign: 'center',
+		color: '#ffffff',
+	},
+	friendListBox: {
+		flexDirection: 'row',
+		// padding: 10,
+	},
+	friendListBox1: {
+		flexDirection: 'row',
+		// padding: 10,
+		marginTop: -10,
+	},
+	friendBox: {
+		width: 70,
+		alignItems: 'center',
+	},
+	friendText: {
+		fontSize: 15,
+		marginTop: 8,
+		color: '#ffffff',
+	},
+
 });
