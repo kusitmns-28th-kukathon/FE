@@ -11,6 +11,7 @@ import MyPage from "./screens/mypage";
 import Splash from "./screens/splash";
 import Calendar from "./screens/calendar";
 import Search from "./screens/search";
+import Alarm from "./screens/alarm";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -108,6 +109,20 @@ function StackScreen() {
       <Stack.Screen
         name="Search"
         component={Search}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Friend"
+        component={Friend}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Alarm"
+        component={Alarm}
         options={{
           headerShown: false,
         }}

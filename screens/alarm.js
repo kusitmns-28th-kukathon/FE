@@ -11,64 +11,47 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
 
-const FriendList = [
+const alarmList = [
   {
     id: 1,
     name: "김철수",
-    profile: require("../assets/profile.png"),
+    time: "8:45 PM",
   },
   {
     id: 2,
-    name: "한수현",
-    profile: require("../assets/profile.png"),
+    name: "김철수",
+    time: "8:45 PM",
   },
   {
     id: 3,
-    name: "최호연",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 4,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 5,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 6,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 7,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 8,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
+    name: "김철수",
+    time: "8:45 PM",
   },
 ];
 
-const Search = () => {
+const Alarm = () => {
   const navigation = useNavigation();
 
   return (
     <SafeAreaView style={Styles.container}>
       <View style={Styles.header}>
-        <TouchableOpacity onPress={() => navigation.navigate("Friend")}>
+        <TouchableOpacity onPress={() => navigation.navigate("Calendar")}>
           <Image source={require("../assets/leftArrow.png")} />
         </TouchableOpacity>
-        <Text style={Styles.Title}>친구 찾기</Text>
+        <Text style={Styles.Title}>알림</Text>
       </View>
-      <TextInput
-        style={Styles.searchBox}
-        placeholder="이메일로 친구를 검색해보세요"
-      />
+
+      <View style={Styles.buttonBox}>
+        <TouchableOpacity style={Styles.button}>
+          <Text style={Styles.buttonText}>친구의 감사</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={Styles.button}>
+          <Text style={Styles.buttonText}>받은 요청</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={Styles.button}>
+          <Text style={Styles.buttonText}>보낸 요청</Text>
+        </TouchableOpacity>
+      </View>
 
       <View style={Styles.bottom}>
         <View style={Styles.content}>
@@ -81,15 +64,15 @@ const Search = () => {
           contentContainerStyle={Styles.friendListBox}
           showsHorizontalScrollIndicator={false}
         >
-          {FriendList.map((friend) => (
-            <View style={Styles.friendBox} key={friend.id}>
+          {alarmList.map((alarm) => (
+            <View style={Styles.friendBox} key={alarm.id}>
               <View style={Styles.friendOne}>
-                <Image style={Styles.friendProfile} source={friend.profile} />
+                <Image style={Styles.friendProfile} source={alarm.profile} />
                 <View style={Styles.friend}>
-                  <Text style={Styles.friendName}>{friend.name}</Text>
-                  <TouchableOpacity style={Styles.plusButton}>
-                    <Text>추가</Text>
-                  </TouchableOpacity>
+                  <Text style={Styles.friendName}>
+                    {alarm.name}님이 감사일기를 작성했어요.
+                  </Text>
+                  <Text style={Styles.time}>{alarm.time}</Text>
                 </View>
               </View>
             </View>
@@ -100,7 +83,7 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Alarm;
 
 const Styles = StyleSheet.create({
   container: {
@@ -198,5 +181,26 @@ const Styles = StyleSheet.create({
     paddingRight: 10,
     paddingTop: 5,
     paddingBottom: 5,
+  },
+
+  buttonBox: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  button: {
+    width: 120,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    padding: 10,
+    borderRadius: 30,
+  },
+  buttonText: {
+    color: "#fff",
+  },
+  time: {
+    color: "#999",
   },
 });
