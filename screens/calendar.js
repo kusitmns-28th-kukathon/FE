@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { format } from "date-fns";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const CalendarView = () => {
   const posts = [
@@ -45,7 +46,7 @@ const CalendarView = () => {
   };
 
   return (
-    <View style={Styles.container}>
+    <SafeAreaView style={Styles.container}>
       <Calendar
         style={Styles.calendar}
         markedDates={markedSelectedDates}
@@ -63,7 +64,7 @@ const CalendarView = () => {
           <Text style={Styles.Content}>내용: {selectedPost.contents}</Text>
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 

@@ -1,11 +1,12 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const Mypage = () => {
   return (
-    <View style={Styles.container}>
+    <SafeAreaView style={Styles.container}>
       <Text style={Styles.HomeText}>Mypage 화면</Text>
-    </View>
+    </SafeAreaView>
   );
 };
 
