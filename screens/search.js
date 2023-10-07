@@ -14,53 +14,18 @@ import { accessTokenState } from "../states/auth";
 import { useRecoilState } from "recoil";
 import axios from "axios";
 
-// const FriendList = [
-//   {
-//     id: 1,
-//     name: "김철수",
-//     profile: require("../assets/profile.png"),
-//   },
-//   {
-//     id: 2,
-//     name: "한수현",
-//     profile: require("../assets/profile.png"),
-//   },
-//   {
-//     id: 3,
-//     name: "최호연",
-//     profile: require("../assets/profile.png"),
-//   },
-//   {
-//     id: 4,
-//     name: "박예진",
-//     profile: require("../assets/profile.png"),
-//   },
-//   {
-//     id: 5,
-//     name: "박예진",
-//     profile: require("../assets/profile.png"),
-//   },
-//   {
-//     id: 6,
-//     name: "박예진",
-//     profile: require("../assets/profile.png"),
-//   },
-//   {
-//     id: 7,
-//     name: "박예진",
-//     profile: require("../assets/profile.png"),
-//   },
-//   {
-//     id: 8,
-//     name: "박예진",
-//     profile: require("../assets/profile.png"),
-//   },
-// ];
-
 const Search = () => {
   const navigation = useNavigation();
   const [friendList, setFriendList] = useState([]);
   const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [friendRequestStatus, setFriendRequestStatus] = useState({});
+
+  const sendFriendRequest = (friend) => {
+    setFriendRequestStatus((prevStatus) => ({
+      ...prevStatus,
+      [friend.userId]: !prevStatus[friend.userId],
+    }));
+  };
 
   const FriendList = () => {
     axios
@@ -117,8 +82,20 @@ const Search = () => {
                 />
                 <View style={Styles.friend}>
                   <Text style={Styles.friendName}>{friend.nickname}</Text>
-                  <TouchableOpacity style={Styles.plusButton}>
-                    <Text>추가</Text>
+                  <TouchableOpacity
+                    style={[
+                      Styles.plusButton,
+                      {
+                        backgroundColor: friendRequestStatus[friend.userId]
+                          ? "#000"
+                          : "#fff",
+                      },
+                    ]}
+                    onPress={() => sendFriendRequest(friend)}
+                  >
+                    <Text>
+                      {friendRequestStatus[friend.userId] ? "요청됨" : "추가"}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -230,10 +207,8 @@ const Styles = StyleSheet.create({
     width: "70%",
   },
   plusButton: {
-    borderWidth: 1,
     borderColor: "#ddd",
     borderRadius: 15,
-    backgroundColor: "#fff",
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 6,
