@@ -5,29 +5,32 @@ import { format } from "date-fns";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from "expo-linear-gradient";
+import axios from "axios";
+import { accessTokenState } from "../states/auth";
+import { useRecoilState } from "recoil";
 
-const posts = [
-  {
-    id: 1,
-    contents: ["26일 내용입니다", "26일 내용입니다2", "26일 내용입니다3"],
-    date: "2023-10-26",
-  },
-  {
-    id: 2,
-    contents: ["27일 내용입니다2", "27일 내용입니다3"],
-    date: "2023-10-27",
-  },
-  {
-    id: 3,
-    contents: [
-      "18일 내용입니다",
-      "18일 내용입니다",
-      "18일 내용입니다",
-      "18일 내용입니다",
-    ],
-    date: "2023-10-18",
-  },
-];
+// const posts = [
+//   {
+//     id: 1,
+//     contents: ["26일 내용입니다", "26일 내용입니다2", "26일 내용입니다3"],
+//     date: "2023-10-26",
+//   },
+//   {
+//     id: 2,
+//     contents: ["27일 내용입니다2", "27일 내용입니다3"],
+//     date: "2023-10-27",
+//   },
+//   {
+//     id: 3,
+//     contents: [
+//       "18일 내용입니다",
+//       "18일 내용입니다",
+//       "18일 내용입니다",
+//       "18일 내용입니다",
+//     ],
+//     date: "2023-10-18",
+//   },
+// ];
 
 const calendarTheme = {
   calendarBackground: "#100D30",
@@ -49,6 +52,25 @@ const calendarTheme = {
 
 const CalendarView = () => {
   const navigation = useNavigation();
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+  const [posts, setPostList] = useState([]);
+
+  const PostList = () => {
+    axios
+      .get("http://3.37.52.73:80/api/user/diary", {
+        headers: {
+          access: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsInJvbGVzIjoiVVNFUiIsImlhdCI6MTY5NjY4MDQ2MSwiZXhwIjoxNjk5MjcyNDYxfQ.O6CRZsSHuwu-tuRfvde4F-f86L2vbTcWVUVFDwbVvrY`,
+        },
+      })
+      .then((res) => {
+        setPostList(res.data.posts);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  PostList();
 
   const markedDates = posts.reduce((acc, current) => {
     const formattedDate = format(new Date(current.date), "yyyy-MM-dd");
