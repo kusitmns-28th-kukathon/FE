@@ -127,6 +127,13 @@ function StackScreen() {
           headerShown: false,
         }}
       />
+      <Stack.Screen
+        name="Calendar"
+        component={Calendar}
+        options={{
+          headerShown: false,
+        }}
+      />
     </Stack.Navigator>
   );
 }

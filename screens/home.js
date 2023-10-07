@@ -18,16 +18,19 @@ import Star1 from './starPosition/Star1';
 import Star2 from './starPosition/Star2';
 import Star3 from './starPosition/Star3';
 
-const Home = () => {
-	const bottomSheetRef = useRef(null);
-	const navigation = useNavigation();
-	// variables
-	const snapPoints = useMemo(() => ['50%', '14%'], []);
 
-	// callbacks
-	const handleSheetChanges = useCallback(index => {
-		console.log('handleSheetChanges', index);
-	}, []);
+const Home = () => {
+  const bottomSheetRef = useRef(null);
+  const navigation = useNavigation();
+  // variables
+  const snapPoints = useMemo(() => ["50%", "14%"], []);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
+  // callbacks
+  const handleSheetChanges = useCallback((index) => {
+    console.log("handleSheetChanges", index);
+  }, []);
+
 
 	const addList = value => {
 		setBtn(!btn);
@@ -134,6 +137,7 @@ const Home = () => {
 			{/* </SafeAreaView> */}
 		</LinearGradient>
 	);
+
 };
 
 export default Home;
@@ -248,4 +252,5 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		lineHeight: 40,
 	},
+
 });
