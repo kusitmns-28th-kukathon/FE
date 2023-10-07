@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -10,52 +10,78 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import { TextInput } from "react-native-gesture-handler";
+import { accessTokenState } from "../states/auth";
+import { useRecoilState } from "recoil";
+import axios from "axios";
 
-const FriendList = [
-  {
-    id: 1,
-    name: "김철수",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 2,
-    name: "한수현",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 3,
-    name: "최호연",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 4,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 5,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 6,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 7,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-  {
-    id: 8,
-    name: "박예진",
-    profile: require("../assets/profile.png"),
-  },
-];
+// const FriendList = [
+//   {
+//     id: 1,
+//     name: "김철수",
+//     profile: require("../assets/profile.png"),
+//   },
+//   {
+//     id: 2,
+//     name: "한수현",
+//     profile: require("../assets/profile.png"),
+//   },
+//   {
+//     id: 3,
+//     name: "최호연",
+//     profile: require("../assets/profile.png"),
+//   },
+//   {
+//     id: 4,
+//     name: "박예진",
+//     profile: require("../assets/profile.png"),
+//   },
+//   {
+//     id: 5,
+//     name: "박예진",
+//     profile: require("../assets/profile.png"),
+//   },
+//   {
+//     id: 6,
+//     name: "박예진",
+//     profile: require("../assets/profile.png"),
+//   },
+//   {
+//     id: 7,
+//     name: "박예진",
+//     profile: require("../assets/profile.png"),
+//   },
+//   {
+//     id: 8,
+//     name: "박예진",
+//     profile: require("../assets/profile.png"),
+//   },
+// ];
 
 const Search = () => {
   const navigation = useNavigation();
+  const [friendList, setFriendList] = useState([]);
+  const [accessToken, setAccessToken] = useRecoilState(accessTokenState);
+
+  const FriendList = () => {
+    axios
+      .get(
+        "http://3.37.52.73:80/friends/search?email=test&pageNum=0&pageSize=5",
+        {
+          headers: {
+            access: accessToken,
+          },
+        }
+      )
+      .then((res) => {
+        console.log(res.data);
+        setFriendList(res.data.users);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  FriendList();
 
   return (
     <SafeAreaView style={Styles.container}>
@@ -82,12 +108,15 @@ const Search = () => {
           contentContainerStyle={Styles.friendListBox}
           showsHorizontalScrollIndicator={false}
         >
-          {FriendList.map((friend) => (
-            <View style={Styles.friendBox} key={friend.id}>
+          {friendList.map((friend) => (
+            <View style={Styles.friendBox} key={friend.userId}>
               <View style={Styles.friendOne}>
-                <Image style={Styles.friendProfile} source={friend.profile} />
+                <Image
+                  style={Styles.friendProfile}
+                  source={require("../assets/defaultProfile.png")}
+                />
                 <View style={Styles.friend}>
-                  <Text style={Styles.friendName}>{friend.name}</Text>
+                  <Text style={Styles.friendName}>{friend.nickname}</Text>
                   <TouchableOpacity style={Styles.plusButton}>
                     <Text>추가</Text>
                   </TouchableOpacity>
@@ -197,8 +226,8 @@ const Styles = StyleSheet.create({
   friendName: {
     fontSize: 15,
     fontWeight: "bold",
-    marginRight: 160,
     color: "#fff",
+    width: "70%",
   },
   plusButton: {
     borderWidth: 1,
