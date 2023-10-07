@@ -8,7 +8,7 @@ const Splash = () => {
   useEffect(() => {
     const timer = setTimeout(() => {
       navigation.navigate("Login");
-    }, 6000);
+    }, 4500);
 
     return () => clearTimeout(timer);
   }, []);
