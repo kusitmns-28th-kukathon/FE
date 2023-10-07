@@ -1,4 +1,3 @@
-
 import React, {useCallback, useState, useMemo, useRef} from 'react';
 import {
 	View,
@@ -75,7 +74,6 @@ const Home = () => {
 			</BottomSheet>
 		</SafeAreaView>
 	);
-
 };
 
 export default Home;
@@ -146,9 +144,8 @@ const styles = StyleSheet.create({
 	registrationBtn: {
 		position: 'absolute',
 		left: 20,
-		top: 250,
+		top: 300,
 		borderRadius: 8,
-		// bottom: 0,
 		width: 350,
 		height: 40,
 		backgroundColor: '#7149E0',
@@ -160,5 +157,4 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		lineHeight: 40,
 	},
-
 });
