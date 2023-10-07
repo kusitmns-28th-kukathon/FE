@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -28,8 +28,49 @@ const alarmList = [
   },
 ];
 
+const responseList = [
+  {
+    id: 1,
+    name: "김철수",
+    time: "8:45 PM",
+  },
+  {
+    id: 2,
+    name: "김철수",
+    time: "8:45 PM",
+  },
+];
+
+const resquestList = [
+  {
+    id: 1,
+    name: "김철수",
+    time: "8:45 PM",
+  },
+  {
+    id: 2,
+    name: "김철수",
+    time: "8:45 PM",
+  },
+  {
+    id: 3,
+    name: "김철수",
+    time: "8:45 PM",
+  },
+  {
+    id: 4,
+    name: "김철수",
+    time: "8:45 PM",
+  },
+];
+
 const Alarm = () => {
   const navigation = useNavigation();
+  const [activeFilter, setActiveFilter] = useState(1);
+
+  const handleFilterChange = (filter) => {
+    setActiveFilter(filter);
+  };
 
   return (
     <SafeAreaView style={Styles.container}>
@@ -41,14 +82,56 @@ const Alarm = () => {
       </View>
 
       <View style={Styles.buttonBox}>
-        <TouchableOpacity style={Styles.button}>
-          <Text style={Styles.buttonText}>친구의 감사</Text>
+        <TouchableOpacity
+          style={[
+            Styles.button,
+            activeFilter === 1 ? Styles.activeButton : Styles.inActiveButton,
+          ]}
+          onPress={() => handleFilterChange(1)}
+        >
+          <Text
+            style={
+              activeFilter === 1
+                ? Styles.activeButtonText
+                : Styles.inActiveButtonText
+            }
+          >
+            친구의 감사
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={Styles.inActiveButton}>
-          <Text style={Styles.inActiveButtonText}>받은 요청</Text>
+        <TouchableOpacity
+          style={[
+            Styles.inActiveButton,
+            activeFilter === 2 ? Styles.activeButton : Styles.inActiveButton,
+          ]}
+          onPress={() => handleFilterChange(2)}
+        >
+          <Text
+            style={
+              activeFilter === 2
+                ? Styles.activeButtonText
+                : Styles.inActiveButtonText
+            }
+          >
+            받은 요청
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={Styles.inActiveButton}>
-          <Text style={Styles.inActiveButtonText}>보낸 요청</Text>
+        <TouchableOpacity
+          style={[
+            Styles.inActiveButton,
+            activeFilter === 3 ? Styles.activeButton : Styles.inActiveButton,
+          ]}
+          onPress={() => handleFilterChange(3)}
+        >
+          <Text
+            style={
+              activeFilter === 3
+                ? Styles.activeButtonText
+                : Styles.inActiveButtonText
+            }
+          >
+            보낸 요청
+          </Text>
         </TouchableOpacity>
       </View>
 
@@ -57,22 +140,59 @@ const Alarm = () => {
           contentContainerStyle={Styles.friendListBox}
           showsHorizontalScrollIndicator={false}
         >
-          {alarmList.map((alarm) => (
-            <View style={Styles.alarmBox} key={alarm.id}>
-              <View stlye={Styles.imageBox}>
-                <Image
-                  style={Styles.friendProfile}
-                  source={require("../assets/purpleAlarm.png")}
-                />
+          {activeFilter === 1 &&
+            alarmList.map((alarm) => (
+              <View style={Styles.alarmBox} key={alarm.id}>
+                <View stlye={Styles.imageBox}>
+                  <Image
+                    style={Styles.friendProfile}
+                    source={require("../assets/purpleAlarm.png")}
+                  />
+                </View>
+                <View style={Styles.alarm}>
+                  <Text style={Styles.alarmContent}>
+                    {alarm.name}님이 감사일기를 작성했어요.
+                  </Text>
+                  <Text style={Styles.alarmTime}>{alarm.time}</Text>
+                </View>
               </View>
-              <View style={Styles.alarm}>
-                <Text style={Styles.alarmContent}>
-                  {alarm.name}님이 감사일기를 작성했어요.
-                </Text>
-                <Text style={Styles.alarmTime}>{alarm.time}</Text>
+            ))}
+
+          {activeFilter === 2 &&
+            responseList.map((alarm) => (
+              <View style={Styles.alarmBox} key={alarm.id}>
+                <View stlye={Styles.imageBox}>
+                  <Image
+                    style={Styles.friendProfile}
+                    source={require("../assets/purpleAlarm.png")}
+                  />
+                </View>
+                <View style={Styles.alarm}>
+                  <Text style={Styles.alarmContent}>
+                    {alarm.name}님이 감사일기를 작성했어요.
+                  </Text>
+                  <Text style={Styles.alarmTime}>{alarm.time}</Text>
+                </View>
               </View>
-            </View>
-          ))}
+            ))}
+
+          {activeFilter === 3 &&
+            resquestList.map((alarm) => (
+              <View style={Styles.alarmBox} key={alarm.id}>
+                <View stlye={Styles.imageBox}>
+                  <Image
+                    style={Styles.friendProfile}
+                    source={require("../assets/purpleAlarm.png")}
+                  />
+                </View>
+                <View style={Styles.alarm}>
+                  <Text style={Styles.alarmContent}>
+                    {alarm.name}님이 감사일기를 작성했어요.
+                  </Text>
+                  <Text style={Styles.alarmTime}>{alarm.time}</Text>
+                </View>
+              </View>
+            ))}
         </ScrollView>
       </View>
     </SafeAreaView>
@@ -84,7 +204,7 @@ export default Alarm;
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#100D30",
     padding: 15,
   },
   header: {
@@ -100,6 +220,7 @@ const Styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     marginLeft: 13,
+    color: "#fff",
   },
   NextBottom: {
     backgroundColor: "purple",
@@ -166,11 +287,11 @@ const Styles = StyleSheet.create({
     marginLeft: 15,
     marginRight: 15,
   },
-  button: {
+  activeButton: {
     width: 110,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "black",
+    backgroundColor: "#D0D7DE",
     padding: 10,
     borderRadius: 30,
   },
@@ -178,15 +299,15 @@ const Styles = StyleSheet.create({
     width: 110,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#F2F2F2",
+    backgroundColor: "#24292F",
     padding: 10,
     borderRadius: 30,
   },
-  buttonText: {
-    color: "#fff",
+  activeButtonText: {
+    color: "#000",
   },
   inActiveButtonText: {
-    color: "#666",
+    color: "#fff",
   },
   time: {
     color: "#999",
@@ -197,7 +318,8 @@ const Styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     borderBottomWidth: 1,
-    borderBottomColor: "#ddd",
+    borderBottomColor: "#373552",
+
     paddingTop: 8,
     paddingBottm: 8,
     gap: 10,
@@ -212,6 +334,7 @@ const Styles = StyleSheet.create({
     fontSize: 15,
     marginRight: 180,
     width: "100%",
+    color: "#fff",
   },
   alarmTime: {
     fontSize: 15,
