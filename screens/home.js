@@ -3,16 +3,20 @@ import {
 	View,
 	SafeAreaView,
 	ScrollView,
+	Image,
 	Text,
 	StyleSheet,
 	TextInput,
 	TouchableOpacity,
+	StatusBar,
 } from 'react-native';
 import BottomSheet from '@gorhom/bottom-sheet';
+import {LinearGradient} from 'expo-linear-gradient';
+import {useNavigation} from '@react-navigation/native';
 
 const Home = () => {
 	const bottomSheetRef = useRef(null);
-
+	const navigation = useNavigation();
 	// variables
 	const snapPoints = useMemo(() => ['50%', '14%'], []);
 
@@ -27,9 +31,30 @@ const Home = () => {
 
 	const [textArray, setTextArray] = useState([]);
 	const [value, onChangeText] = useState('');
+	const [btn, setBtn] = useState(false);
 
 	return (
-		<SafeAreaView style={styles.container}>
+		<LinearGradient colors={['#0A0026', '#200C5B']} style={styles.container}>
+			<StatusBar barStyle="light-content" />
+			{/* <SafeAreaView style={styles.container}> */}
+			<View style={styles.header}>
+				<Image style={styles.logo} source={require('../assets/homeLogo.png')} />
+				<TouchableOpacity style={styles.alarm} onPress={() => setBtn(!btn)}>
+					<Image source={require('../assets/alarmWhite.png')} />
+				</TouchableOpacity>
+			</View>
+			<View style={styles.starMap}>
+				<Image
+					style={styles.background}
+					source={require('../assets/star1.png')}
+				/>
+				<TouchableOpacity
+					style={btn ? styles.star : styles.starOn}
+					// onPrestss={() => navigation.navigate('Alarm')}
+				>
+					<Image source={require('../assets/ShineStar.png')} />
+				</TouchableOpacity>
+			</View>
 			<BottomSheet
 				ref={bottomSheetRef}
 				index={1}
@@ -72,7 +97,8 @@ const Home = () => {
 					</View>
 				</View>
 			</BottomSheet>
-		</SafeAreaView>
+			{/* </SafeAreaView> */}
+		</LinearGradient>
 	);
 };
 
@@ -92,6 +118,36 @@ const styles = StyleSheet.create({
 		// display: 'flex',
 		// marginTop: 50,
 		// justifyContent: 'center',
+	},
+	header: {
+		display: 'flex',
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+	},
+	alarm: {
+		marginTop: 60,
+		marginRight: 30,
+	},
+	logo: {
+		marginTop: 67,
+		marginLeft: 30,
+		width: 96,
+		height: 18,
+	},
+	starMap: {
+		position: 'relative',
+	},
+	star: {
+		position: 'absolute',
+		top: 85,
+		left: 75,
+		opacity: 0,
+	},
+	starOn: {
+		position: 'absolute',
+		top: 85,
+		left: 75,
+		opacity: 1,
 	},
 	scrollView: {
 		height: 700,
