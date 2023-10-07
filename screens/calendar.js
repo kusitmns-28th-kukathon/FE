@@ -1,23 +1,20 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet } from "react-native";
-import { useNavigation } from "@react-navigation/native";
 import { Calendar } from "react-native-calendars";
 import { format } from "date-fns";
 
 const CalendarView = () => {
-  const navigation = useNavigation();
-
   const posts = [
     {
       id: 1,
-      title: "제목입니다.",
-      contents: "내용입니다.",
+      title: "26일이야",
+      contents: "26일 내용입니다",
       date: "2023-10-26",
     },
     {
       id: 2,
-      title: "제목입니다.",
-      contents: "내용입니다.",
+      title: "27일이야",
+      contents: "27일 내용입니다",
       date: "2023-10-27",
     },
   ];
@@ -31,6 +28,7 @@ const CalendarView = () => {
   const [selectedDate, setSelectedDate] = useState(
     format(new Date(), "yyyy-MM-dd")
   );
+  const [selectedPost, setSelectedPost] = useState(null);
 
   const markedSelectedDates = {
     ...markedDates,
@@ -38,6 +36,12 @@ const CalendarView = () => {
       selected: true,
       marked: markedDates[selectedDate]?.marked,
     },
+  };
+
+  const handleDayPress = (day) => {
+    setSelectedDate(day.dateString);
+    const selectedPost = posts.find((post) => post.date === day.dateString);
+    setSelectedPost(selectedPost);
   };
 
   return (
@@ -51,10 +55,14 @@ const CalendarView = () => {
           dotColor: "#009688",
           todayTextColor: "#009688",
         }}
-        onDayPress={(day) => {
-          setSelectedDate(day.dateString);
-        }}
+        onDayPress={handleDayPress}
       />
+      {selectedPost && (
+        <View>
+          <Text style={Styles.Title}>제목: {selectedPost.title}</Text>
+          <Text style={Styles.Content}>내용: {selectedPost.contents}</Text>
+        </View>
+      )}
     </View>
   );
 };
@@ -65,7 +73,8 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    justifyContent: "center",
+    paddingTop: 50,
+    padding: 20,
   },
   NextBottom: {
     backgroundColor: "purple",
@@ -82,6 +91,16 @@ const Styles = StyleSheet.create({
   },
   calendar: {
     color: "#fff",
-    margin: 20,
+  },
+  Title: {
+    fontSize: 20,
+    fontWeight: "bold",
+    marginBottom: 10,
+    marginLeft: 10,
+    marginTop: 20,
+  },
+  Content: {
+    fontSize: 15,
+    marginLeft: 10,
   },
 });
