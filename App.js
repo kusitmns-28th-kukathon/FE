@@ -1,6 +1,11 @@
 import React from "react";
 import Navigation from "./Navigation";
+import { RecoilRoot } from "recoil";
 
 export default function App() {
-  return <Navigation />;
+  return (
+    <RecoilRoot>
+      <Navigation />
+    </RecoilRoot>
+  );
 }
