@@ -14,6 +14,12 @@ const Home = () => {
       >
         <Text style={Styles.BottomText}>스플래시 화면으로</Text>
       </TouchableOpacity>
+      <TouchableOpacity
+        onPress={() => navigation.navigate("Calendar", { screen: "Calendar" })}
+        style={Styles.NextBottom}
+      >
+        <Text style={Styles.BottomText}>일정표 화면으로</Text>
+      </TouchableOpacity>
     </View>
   );
 };
