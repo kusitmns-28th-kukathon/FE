@@ -102,7 +102,7 @@ const Friend = () => {
 
 				<ScrollView
 					horizontal
-					contentContainerStyle={Styles.friendListBox}
+					contentContainerStyle={Styles.friendListBox1}
 					showsHorizontalScrollIndicator={false}
 					ref={ref => {
 						this.scrollView = ref;
@@ -167,7 +167,7 @@ const Styles = StyleSheet.create({
 		alignItems: 'center',
 		paddingLeft: 10,
 		paddingRight: 10,
-		paddingTop: 15,
+		marginTop: -20,
 		paddingBottom: 10,
 		color: '#ffffff',
 	},
@@ -188,6 +188,7 @@ const Styles = StyleSheet.create({
 		paddingLeft: 25,
 		marginLeft: 20,
 	},
+
 	mainTitle: {
 		marginLeft: 20,
 		marginTop: 20,
@@ -247,7 +248,12 @@ const Styles = StyleSheet.create({
 	},
 	friendListBox: {
 		flexDirection: 'row',
-		padding: 10,
+		// padding: 10,
+	},
+	friendListBox1: {
+		flexDirection: 'row',
+		// padding: 10,
+		marginTop: -10,
 	},
 	friendBox: {
 		width: 70,
