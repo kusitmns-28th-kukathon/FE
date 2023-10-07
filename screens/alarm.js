@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const alarmList = [
   {
@@ -67,10 +68,59 @@ const resquestList = [
 const Alarm = () => {
   const navigation = useNavigation();
   const [activeFilter, setActiveFilter] = useState(1);
+  const [responseLists, setResponseList] = useState([]);
+  const [resquestLists, setResquestList] = useState([]);
 
   const handleFilterChange = (filter) => {
     setActiveFilter(filter);
   };
+
+  const alarmSend = () => {
+    axios
+      .post("http://3.37.52.73:80/send-alarm", {
+        headers: {
+          access: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsInJvbGVzIjoiVVNFUiIsImlhdCI6MTY5NjY4MDQ2MSwiZXhwIjoxNjk5MjcyNDYxfQ.O6CRZsSHuwu-tuRfvde4F-f86L2vbTcWVUVFDwbVvrY`,
+        },
+      })
+      .then(() => {})
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const ResponseList = () => {
+    axios
+      .get("http://3.37.52.73:80/friend/received-request", {
+        headers: {
+          access: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsInJvbGVzIjoiVVNFUiIsImlhdCI6MTY5NjY4MDQ2MSwiZXhwIjoxNjk5MjcyNDYxfQ.O6CRZsSHuwu-tuRfvde4F-f86L2vbTcWVUVFDwbVvrY`,
+        },
+      })
+      .then((res) => {
+        setResponseList(res.data.requests);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const RequestList = () => {
+    axios
+      .get("http://3.37.52.73:80/friend/sent-request", {
+        headers: {
+          access: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyNyIsInJvbGVzIjoiVVNFUiIsImlhdCI6MTY5NjY4MDQ2MSwiZXhwIjoxNjk5MjcyNDYxfQ.O6CRZsSHuwu-tuRfvde4F-f86L2vbTcWVUVFDwbVvrY`,
+        },
+      })
+      .then((res) => {
+        setResquestList(res.data.requests);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  alarmSend();
+  ResponseList();
+  RequestList();
 
   return (
     <SafeAreaView style={Styles.container}>

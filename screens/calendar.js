@@ -9,29 +9,6 @@ import axios from "axios";
 import { accessTokenState } from "../states/auth";
 import { useRecoilState } from "recoil";
 
-// const posts = [
-//   {
-//     id: 1,
-//     contents: ["26일 내용입니다", "26일 내용입니다2", "26일 내용입니다3"],
-//     date: "2023-10-26",
-//   },
-//   {
-//     id: 2,
-//     contents: ["27일 내용입니다2", "27일 내용입니다3"],
-//     date: "2023-10-27",
-//   },
-//   {
-//     id: 3,
-//     contents: [
-//       "18일 내용입니다",
-//       "18일 내용입니다",
-//       "18일 내용입니다",
-//       "18일 내용입니다",
-//     ],
-//     date: "2023-10-18",
-//   },
-// ];
-
 const calendarTheme = {
   calendarBackground: "#100D30",
   textSectionTitleColor: "#fff",
