@@ -1,4 +1,10 @@
-import React, {useCallback, useState, useMemo, useRef, useEffect} from 'react';
+import React, {
+  useCallback,
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+} from "react";
 import {
 	View,
 	ScrollView,
@@ -202,119 +208,120 @@ const Home = () => {
 	} else {
 		<></>;
 	}
+
 };
 
 export default Home;
 
 const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		// backgroundColor: '#100D30',
-	},
-	contentContainer: {
-		flex: 1,
-		padding: 20,
+  container: {
+    flex: 1,
+    // backgroundColor: '#100D30',
+  },
+  contentContainer: {
+    flex: 1,
+    padding: 20,
 
-		// width: 390,
-		// position: 'relative',
-		// display: 'flex',
-		// marginTop: 50,
-		// justifyContent: 'center',
-	},
-	header: {
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		marginTop: 15,
-	},
-	alarm: {
-		marginTop: 60,
-		marginRight: 30,
-	},
-	logo: {
-		marginTop: 67,
-		marginLeft: 30,
-		width: 96,
-		height: 18,
-	},
-	starMap: {
-		position: 'relative',
-	},
-	star: {
-		position: 'absolute',
-		top: 425,
-		left: 110,
-		opacity: 1,
-	},
-	starOn: {
-		position: 'absolute',
-		top: 85,
-		left: 75,
-		opacity: 1,
-	},
-	scrollView: {
-		height: 700,
-		width: '100%',
-		flex: 1,
-		flexDirection: 'coulmn',
-	},
-	BottomSheetContainer: {
-		opacity: 0.8,
-		borderRadius: 20,
-	},
-	mainTitle: {
-		display: 'flex',
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
-	},
-	textTitle: {
-		fontStyle: 'normal',
-		fontSize: 16,
-		fontWeight: 'bold',
-		color: '#24292F',
-	},
-	PlusTitle: {
-		backgroundColor: '#ffffff',
-		width: 32,
-		height: 32,
-		borderRadius: 500,
-		position: 'relative',
-	},
-	TextPlus: {
-		textAlign: 'center',
-		position: 'absolute',
-		top: -3,
-		left: 7,
-		fontSize: 30,
-	},
-	inputTag: {
-		marginTop: 20,
-		height: 50,
-		width: 350,
-		borderRadius: 100,
-		padding: 10,
-		backgroundColor: '#ffffff',
-		verticalAlign: 'middle',
-		lineHeight: 20,
-		paddingTop: 15,
-		paddingLeft: 25,
-	},
+    // width: 390,
+    // position: 'relative',
+    // display: 'flex',
+    // marginTop: 50,
+    // justifyContent: 'center',
+  },
+  header: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 15,
+  },
+  alarm: {
+    marginTop: 60,
+    marginRight: 30,
+  },
+  logo: {
+    marginTop: 67,
+    marginLeft: 30,
+    width: 96,
+    height: 18,
+  },
+  starMap: {
+    position: "relative",
+  },
+  star: {
+    position: "absolute",
+    top: 425,
+    left: 110,
+    opacity: 1,
+  },
+  starOn: {
+    position: "absolute",
+    top: 85,
+    left: 75,
+    opacity: 1,
+  },
+  scrollView: {
+    height: 700,
+    width: "100%",
+    flex: 1,
+    flexDirection: "coulmn",
+  },
+  BottomSheetContainer: {
+    opacity: 0.8,
+    borderRadius: 20,
+  },
+  mainTitle: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  textTitle: {
+    fontStyle: "normal",
+    fontSize: 16,
+    fontWeight: "bold",
+    color: "#24292F",
+  },
+  PlusTitle: {
+    backgroundColor: "#ffffff",
+    width: 32,
+    height: 32,
+    borderRadius: 500,
+    position: "relative",
+  },
+  TextPlus: {
+    textAlign: "center",
+    position: "absolute",
+    top: -3,
+    left: 7,
+    fontSize: 30,
+  },
+  inputTag: {
+    marginTop: 20,
+    height: 50,
+    width: 350,
+    borderRadius: 100,
+    padding: 10,
+    backgroundColor: "#ffffff",
+    verticalAlign: "middle",
+    lineHeight: 20,
+    paddingTop: 15,
+    paddingLeft: 25,
+  },
 
-	registrationBtn: {
-		position: 'absolute',
-		left: 20,
-		top: 300,
-		borderRadius: 8,
-		width: 350,
-		height: 40,
-		backgroundColor: '#7149E0',
-	},
-	TextRegister: {
-		textAlign: 'center',
-		color: '#ffffff',
-		fontSize: 15,
-		fontWeight: 'bold',
-		lineHeight: 40,
-	},
+  registrationBtn: {
+    position: "absolute",
+    left: 20,
+    top: 300,
+    borderRadius: 8,
+    width: 350,
+    height: 40,
+    backgroundColor: "#7149E0",
+  },
+  TextRegister: {
+    textAlign: "center",
+    color: "#ffffff",
+    fontSize: 15,
+    fontWeight: "bold",
+    lineHeight: 40,
+  },
 });
