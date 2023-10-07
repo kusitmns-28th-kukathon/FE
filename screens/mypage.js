@@ -1,18 +1,15 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useNavigation } from "@react-navigation/native";
+import { View, Text, StyleSheet } from "react-native";
 
-const Home = () => {
-  const navigation = useNavigation();
-
+const Mypage = () => {
   return (
     <View style={Styles.container}>
-      <Text style={Styles.HomeText}>홈 화면</Text>
+      <Text style={Styles.HomeText}>Mypage 화면</Text>
     </View>
   );
 };
 
-export default Home;
+export default Mypage;
 
 const Styles = StyleSheet.create({
   container: {

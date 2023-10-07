@@ -9,10 +9,12 @@ const Splash = () => {
     <View style={Styles.container}>
       <Text style={Styles.HomeText}>스플래시 화면</Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Signin", { screen: "Signin" })}
+        onPress={() =>
+          navigation.navigate("KakaoLogin", { screen: "KakaoLogin" })
+        }
         style={Styles.NextBottom}
       >
-        <Text style={Styles.BottomText}>로그인 화면으로</Text>
+        <Text style={Styles.BottomText}>카카오 로그인 화면으로</Text>
       </TouchableOpacity>
     </View>
   );

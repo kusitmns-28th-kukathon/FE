@@ -2,23 +2,23 @@ import React from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const KaKaoLogin = () => {
+const KakaoLogin = () => {
   const navigation = useNavigation();
 
   return (
     <View style={Styles.container}>
-      <Text style={Styles.HomeText}>카카오 화면</Text>
+      <Text style={Styles.HomeText}>KakaoLogin 화면</Text>
       <TouchableOpacity
-        onPress={() => navigation.navigate("Signup", { screen: "Signup" })}
+        onPress={() => navigation.navigate("Home", { screen: "Home" })}
         style={Styles.NextBottom}
       >
-        <Text style={Styles.BottomText}>회원가입 화면으로</Text>
+        <Text style={Styles.BottomText}>로그인 성공</Text>
       </TouchableOpacity>
     </View>
   );
 };
 
-export default KaKaoLogin;
+export default KakaoLogin;
 
 const Styles = StyleSheet.create({
   container: {

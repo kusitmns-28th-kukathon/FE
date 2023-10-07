@@ -1,26 +1,18 @@
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
-const Signin = () => {
+const Calendar = () => {
   const navigation = useNavigation();
 
   return (
     <View style={Styles.container}>
-      <Text style={Styles.HomeText}>로그인 화면</Text>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate("KaKaoLogin", { screen: "KaKaoLogin" })
-        }
-        style={Styles.NextBottom}
-      >
-        <Text style={Styles.BottomText}>카카오 화면으로</Text>
-      </TouchableOpacity>
+      <Text style={Styles.HomeText}>캘린더 화면</Text>
     </View>
   );
 };
 
-export default Signin;
+export default Calendar;
 
 const Styles = StyleSheet.create({
   container: {
