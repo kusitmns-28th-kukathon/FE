@@ -68,11 +68,12 @@ const Search = () => {
       <TextInput
         style={Styles.searchBox}
         placeholder="이메일로 친구를 검색해보세요"
+        placeholderTextColor="#8C959F"
       />
 
       <View style={Styles.bottom}>
         <View style={Styles.content}>
-          <Text style={Styles.subtitle}>친구 추천</Text>
+          <Text style={Styles.subtitle}>추천 친구</Text>
           <Text style={Styles.subcontent}>
             같이 별자리를 공유할 친구를 찾아보세요
           </Text>
@@ -105,7 +106,7 @@ export default Search;
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#100D30",
     padding: 15,
   },
   header: {
@@ -120,6 +121,7 @@ const Styles = StyleSheet.create({
   Title: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#fff",
   },
   NextBottom: {
     backgroundColor: "purple",
@@ -139,7 +141,9 @@ const Styles = StyleSheet.create({
     borderColor: "#ddd",
     borderRadius: 25,
     padding: 15,
-    marginTop: 10,
+    marginTop: 20,
+    marginLeft: 18,
+    marginRight: 18,
   },
   content: {
     display: "flex",
@@ -151,6 +155,7 @@ const Styles = StyleSheet.create({
   subtitle: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "#fff",
   },
   subcontent: {
     fontSize: 15,
@@ -173,30 +178,35 @@ const Styles = StyleSheet.create({
     alignItems: "center",
     flexDirection: "row",
     marginBottom: 15,
-    gap: 15,
+    gap: 8,
+    backgroundColor: "#272544",
+    borderRadius: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
   },
   friend: {
     width: "100%",
     flexDirection: "row",
     justifyContent: "spaceBetween",
     alignItems: "center",
-    borderColor: "#ddd",
-    borderWidth: 1,
+    bakgroundColor: "#272544",
     borderRadius: 10,
     padding: 15,
   },
   friendName: {
     fontSize: 15,
     fontWeight: "bold",
-    marginRight: 180,
+    marginRight: 160,
+    color: "#fff",
   },
   plusButton: {
     borderWidth: 1,
     borderColor: "#ddd",
-    borderRadius: 10,
+    borderRadius: 15,
+    backgroundColor: "#fff",
     paddingLeft: 10,
     paddingRight: 10,
-    paddingTop: 5,
-    paddingBottom: 5,
+    paddingTop: 6,
+    paddingBottom: 6,
   },
 });
