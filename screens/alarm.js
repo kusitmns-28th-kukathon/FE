@@ -45,35 +45,32 @@ const Alarm = () => {
         <TouchableOpacity style={Styles.button}>
           <Text style={Styles.buttonText}>친구의 감사</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={Styles.button}>
-          <Text style={Styles.buttonText}>받은 요청</Text>
+        <TouchableOpacity style={Styles.inActiveButton}>
+          <Text style={Styles.inActiveButtonText}>받은 요청</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={Styles.button}>
-          <Text style={Styles.buttonText}>보낸 요청</Text>
+        <TouchableOpacity style={Styles.inActiveButton}>
+          <Text style={Styles.inActiveButtonText}>보낸 요청</Text>
         </TouchableOpacity>
       </View>
 
       <View style={Styles.bottom}>
-        <View style={Styles.content}>
-          <Text style={Styles.subtitle}>친구 추천</Text>
-          <Text style={Styles.subcontent}>
-            같이 별자리를 공유할 친구를 찾아보세요
-          </Text>
-        </View>
         <ScrollView
           contentContainerStyle={Styles.friendListBox}
           showsHorizontalScrollIndicator={false}
         >
           {alarmList.map((alarm) => (
-            <View style={Styles.friendBox} key={alarm.id}>
-              <View style={Styles.friendOne}>
-                <Image style={Styles.friendProfile} source={alarm.profile} />
-                <View style={Styles.friend}>
-                  <Text style={Styles.friendName}>
-                    {alarm.name}님이 감사일기를 작성했어요.
-                  </Text>
-                  <Text style={Styles.time}>{alarm.time}</Text>
-                </View>
+            <View style={Styles.alarmBox} key={alarm.id}>
+              <View stlye={Styles.imageBox}>
+                <Image
+                  style={Styles.friendProfile}
+                  source={require("../assets/purpleAlarm.png")}
+                />
+              </View>
+              <View style={Styles.alarm}>
+                <Text style={Styles.alarmContent}>
+                  {alarm.name}님이 감사일기를 작성했어요.
+                </Text>
+                <Text style={Styles.alarmTime}>{alarm.time}</Text>
               </View>
             </View>
           ))}
@@ -103,6 +100,7 @@ const Styles = StyleSheet.create({
   Title: {
     fontSize: 20,
     fontWeight: "bold",
+    marginLeft: 13,
   },
   NextBottom: {
     backgroundColor: "purple",
@@ -146,32 +144,10 @@ const Styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-  friendBox: {
-    width: "100%",
-    alignItems: "center",
-    flexDirection: "row",
-  },
-  friendOne: {
-    width: "100%",
-    alignItems: "center",
-    flexDirection: "row",
-    marginBottom: 15,
-    gap: 15,
-  },
-  friend: {
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "spaceBetween",
-    alignItems: "center",
-    borderColor: "#ddd",
-    borderWidth: 1,
+  imageBox: {
     borderRadius: 10,
-    padding: 15,
-  },
-  friendName: {
-    fontSize: 15,
-    fontWeight: "bold",
-    marginRight: 180,
+    borderWidth: 1,
+    borderColor: "#ddd",
   },
   plusButton: {
     borderWidth: 1,
@@ -188,19 +164,58 @@ const Styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     marginTop: 10,
+    marginLeft: 15,
+    marginRight: 15,
   },
   button: {
-    width: 120,
+    width: 110,
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "black",
     padding: 10,
     borderRadius: 30,
   },
+  inActiveButton: {
+    width: 110,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#F2F2F2",
+    padding: 10,
+    borderRadius: 30,
+  },
   buttonText: {
     color: "#fff",
   },
+  inActiveButtonText: {
+    color: "#666",
+  },
   time: {
     color: "#999",
+  },
+
+  alarmBox: {
+    width: "100%",
+    alignItems: "center",
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    borderBottomColor: "#ddd",
+    paddingTop: 8,
+    paddingBottm: 8,
+    gap: 10,
+  },
+  alarm: {
+    width: "100%",
+    flexDirection: "column",
+    padding: 15,
+    gap: 5,
+  },
+  alarmContent: {
+    fontSize: 15,
+    marginRight: 180,
+    width: "100%",
+  },
+  alarmTime: {
+    fontSize: 15,
+    color: "#888",
   },
 });
