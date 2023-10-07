@@ -1,3 +1,4 @@
+
 import React, {useCallback, useState, useMemo, useRef} from 'react';
 import {
 	View,
@@ -74,6 +75,7 @@ const Home = () => {
 			</BottomSheet>
 		</SafeAreaView>
 	);
+
 };
 
 export default Home;
@@ -158,4 +160,5 @@ const styles = StyleSheet.create({
 		fontWeight: 'bold',
 		lineHeight: 40,
 	},
+
 });

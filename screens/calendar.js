@@ -1,21 +1,30 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 import { Calendar } from "react-native-calendars";
 import { format } from "date-fns";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const CalendarView = () => {
   const posts = [
     {
       id: 1,
-      title: "26일이야",
-      contents: "26일 내용입니다",
+      contents: ["26일 내용입니다", "26일 내용입니다2", "26일 내용입니다3"],
       date: "2023-10-26",
     },
     {
       id: 2,
-      title: "27일이야",
-      contents: "27일 내용입니다",
+      contents: ["27일 내용입니다2", "27일 내용입니다3"],
       date: "2023-10-27",
+    },
+    {
+      id: 3,
+      contents: [
+        "18일 내용입니다",
+        "18일 내용입니다",
+        "18일 내용입니다",
+        "18일 내용입니다",
+      ],
+      date: "2023-10-18",
     },
   ];
 
@@ -45,25 +54,38 @@ const CalendarView = () => {
   };
 
   return (
-    <View style={Styles.container}>
+    <SafeAreaView style={Styles.container}>
+      <View style={Styles.header}>
+        <Text style={Styles.Title}>캘린더</Text>
+        <Image source={require("../assets/alarm.png")} />
+      </View>
       <Calendar
         style={Styles.calendar}
         markedDates={markedSelectedDates}
         theme={{
-          selectedDayBackgroundColor: "#009688",
-          arrowColor: "#009688",
-          dotColor: "#009688",
+          selectedDayBackgroundColor: "#C8B9F3",
+          arrowColor: "#8867E5",
+          dotColor: "#8867E5",
           todayTextColor: "#009688",
+          textDayHeaderFontWeight: "bold",
+          textDayFontWeight: "bold",
+          textMonthFontWeight: "bold",
+          textMonthFontSize: "20",
+          selectedDayTextColor: "black",
         }}
         onDayPress={handleDayPress}
       />
       {selectedPost && (
         <View>
-          <Text style={Styles.Title}>제목: {selectedPost.title}</Text>
-          <Text style={Styles.Content}>내용: {selectedPost.contents}</Text>
+          <Text style={Styles.Title}>{selectedPost.title}</Text>
+          {selectedPost.contents.map((content, index) => (
+            <Text key={index} style={Styles.Content}>
+              {content}
+            </Text>
+          ))}
         </View>
       )}
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -73,8 +95,17 @@ const Styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    paddingTop: 50,
-    padding: 20,
+    paddingTop: 10,
+    padding: 15,
+  },
+  header: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 15,
+    paddingBottom: 10,
   },
   NextBottom: {
     backgroundColor: "purple",
@@ -102,5 +133,11 @@ const Styles = StyleSheet.create({
   Content: {
     fontSize: 15,
     marginLeft: 10,
+    marginBottom: 10,
+    padding: 13,
+    borderWidth: 2,
+    borderRadius: 25,
+    borderColor: "#EDE8FB",
+    backgroundColor: "#fff",
   },
 });
