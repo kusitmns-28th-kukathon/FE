@@ -10,7 +10,7 @@ import {
 	TouchableOpacity,
 	StatusBar,
 } from 'react-native';
-const Star2 = ({arr2}) => {
+const Star2 = ({arr2, setBtn}) => {
 	const dummy = [1, 2, 3, 4, 5, 6, 7];
 	const star1 = [
 		{top: 85, left: 75},

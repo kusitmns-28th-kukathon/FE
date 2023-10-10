@@ -21,41 +21,49 @@ const FriendList = [
 		id: 1,
 		name: '김철수',
 		profile: require('../assets/profile.png'),
+		x: 450,
 	},
 	{
 		id: 2,
 		name: '한수현',
 		profile: require('../assets/profile.png'),
+		x: 450,
 	},
 	{
 		id: 3,
 		name: '최호연',
 		profile: require('../assets/profile.png'),
+		x: 450,
 	},
 	{
 		id: 4,
 		name: '박예진',
 		profile: require('../assets/profile.png'),
+		x: 450,
 	},
 	{
 		id: 5,
 		name: '박예진',
 		profile: require('../assets/profile.png'),
+		x: 780,
 	},
 	{
 		id: 6,
 		name: '박예진',
 		profile: require('../assets/profile.png'),
+		x: 780,
 	},
 	{
 		id: 7,
 		name: '박예진',
 		profile: require('../assets/profile.png'),
+		x: 780,
 	},
 	{
 		id: 8,
 		name: '박예진',
 		profile: require('../assets/profile.png'),
+		x: 780,
 	},
 ];
 
@@ -95,6 +103,7 @@ const Friend = () => {
 	// 		<Star3 />
 	// 	</ScrollView>
 	// </SafeAreaView>
+	const [dummy2, setDummy2] = useState(['안녕하세요', '하이ㅎ이하이하이']);
 
 	const [lastArray, setLastArray] = useState(['fefwfewfe', 'efwefewfwef']);
 	const [num, setNum] = useState(0);
@@ -122,8 +131,10 @@ const Friend = () => {
 				>
 					{FriendList.map((item, index) => (
 						<View style={Styles.friendBox} key={index}>
-							<Image source={item.profile} style={{width: 50, height: 50}} />
-							<Text style={Styles.friendText}>{item.name}</Text>
+							<TouchableOpacity onPress={this.scrollView.scrollTo({x: item.x})}>
+								<Image source={item.profile} style={{width: 50, height: 50}} />
+								<Text style={Styles.friendText}>{item.name}</Text>
+							</TouchableOpacity>
 						</View>
 					))}
 				</ScrollView>
@@ -132,12 +143,8 @@ const Friend = () => {
 					horizontal
 					contentContainerStyle={Styles.friendListBox}
 					showsHorizontalScrollIndicator={false}
-					ref={ref => {
-						this.scrollView = ref;
-						// onChange={this.scrollView.scrollTo({x: 780})}
-					}}
 				>
-					<Star1 />
+					<Star1 arr2={dummy2} />
 					<Star2 />
 					<Star3 />
 				</ScrollView>
@@ -170,8 +177,8 @@ const Friend = () => {
 							</TouchableOpacity>
 						</View>
 					</View>
-					{lastArray.map(item => (
-						<View style={Styles.inputTag}>
+					{lastArray.map((item, idx) => (
+						<View key={idx} style={Styles.inputTag}>
 							<Text>{item}</Text>
 						</View>
 					))}

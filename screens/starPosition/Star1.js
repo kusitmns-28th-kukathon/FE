@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 import {arrayState, dataState} from '../../states/auth';
 import {useRecoilState} from 'recoil';
-const Star1 = ({arr1}) => {
+const Star1 = ({arr1, setBtn}) => {
 	const dummy = [1, 2, 3, 4, 5, 6, 7];
 	const star1 = [
 		{top: 85, left: 75},
@@ -27,6 +27,7 @@ const Star1 = ({arr1}) => {
 	const [dataOpen, setDataOpen] = useRecoilState(dataState);
 	const spaceData = idx => {
 		setArray(idx);
+		setBtn(false);
 		setDataOpen(true);
 	};
 	useEffect(() => {
